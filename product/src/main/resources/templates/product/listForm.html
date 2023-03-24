@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상품 목록</title>
+    <style>
+      * {
+        outline: 1px solid rgb(204, 204, 204);
+      }
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 53rem;
+        height: 10rem;
+      }
+      table {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>무슨 상품이 있을까?</h1>
+    <div class="wrapper">
+      <table>
+        <thead>
+          <th>상품ID</th>
+          <th>상품명</th>
+          <th>수량</th>
+          <th>가격</th>
+        </thead>
+        <tbody>
+          <tr th:each="products : ${products}">
+            <td th:text="${products.pid}"></td>
+            <td>
+              <a
+                href=""
+                th:href="@{/products/{pid}/inquiry(pid=${products.pid})}"
+                th:text="${products.pname}"
+              ></a>
+            </td>
+            <td th:text="${products.quantity}"></td>
+            <td th:text="${products.price}"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <a href="" th:href="@{/products/add}"><button>등록하기</button></a>
+      </div>
+    </div>
+  </body>
+</html>

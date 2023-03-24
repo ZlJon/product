@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상품 수정</title>
+    <style>
+      * {
+        outline: 1px solid rgb(204, 204, 204);
+      }
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 53rem;
+        height: 10rem;
+      }
+      table {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>수정해봐~</h1>
+    <div class="wrapper">
+      <table>
+        <thead>
+          <th>상품ID</th>
+          <th>상품명</th>
+          <th>수량</th>
+          <th>가격</th>
+        </thead>
+        <tbody>
+          <form id="frm" action="" method="" th:object="${updateForm}">
+            <tr>
+              <td>
+                <input type="text" name="pname" th:field="*{pid}" readonly />
+              </td>
+              <td>
+                <input type="text" name="pname" th:field="*{pname}" />
+                <span class="error"></span>
+                <span class="error" th:errors="*{pname}"></span>
+              </td>
+              <td>
+                <input type="text" name="quantity" th:field="*{quantity}" />
+                <span class="error"></span>
+                <span class="error" th:errors="*{quantity}"></span>
+              </td>
+              <td>
+                <input type="text" name="price" th:field="*{price}" />
+                <span class="error"></span>
+                <span class="error" th:errors="*{price}"></span>
+              </td>
+            </tr>
+          </form>
+        </tbody>
+      </table>
+      <div>
+        <button class="add">저장하기</button>
+        <a href="" th:href="@{/products}"><button>취소하기</button></a>
+      </div>
+    </div>
+  </body>
+  <script>
+    const add = document.querySelector('.add');
+    add.addEventListener('click', (e) => {
+      frm.submit();
+    });
+  </script>
+</html>

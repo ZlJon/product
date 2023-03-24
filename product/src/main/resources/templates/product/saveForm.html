@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상품 등록</title>
+    <style>
+      * {
+        outline: 1px solid rgb(204, 204, 204);
+      }
+      .wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 53rem;
+        height: 9rem;
+      }
+      table {
+        width: 100%;
+        height: 100%;
+      }
+      td {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>무슨 상품을 등록할까?</h1>
+    <div class="wrapper">
+      <table>
+        <thead>
+          <th>상품명</th>
+          <th>수량</th>
+          <th>가격</th>
+        </thead>
+        <tbody>
+          <form id="frm" action="" method="post" th:object="${saveForm}">
+            <div th:if="${#fields.hasGlobalErrors()}">
+              <p
+                class="error"
+                th:each="err : ${#fields.globalErrors()}"
+                th:th:text="${err}"
+              ></p>
+            </div>
+            <tr>
+              <td>
+                <label for="pname" th:for="${#ids.next('pname')}"></label>
+                <input type="text" name="pname" th:field="*{pname}" />
+                <span class="error"></span>
+                <span class="error" th:errors="*{pname}"></span>
+              </td>
+              <td>
+                <label for="quantity">
+                  <input type="text" name="quantity" th:field="*{quantity}" />
+                  <span class="error"></span>
+                  <span class="error" th:errors="*{quantity}"></span>
+                </label>
+              </td>
+              <td>
+                <label for="price">
+                  <input type="text" name="price" th:field="*{price}" />
+                  <span class="error"></span>
+                  <span class="error" th:errors="*{price}"></span>
+                </label>
+              </td>
+            </tr>
+          </form>
+        </tbody>
+      </table>
+      <div>
+        <button class="add" type="submit">등록하기</button>
+        <a href="" th:href="@{/products}"><button>목록으로 가기</button></a>
+      </div>
+    </div>
+  </body>
+  <script>
+    const add = document.querySelector('.add');
+    add.addEventListener('click', (e) => {
+      frm.submit();
+    });
+  </script>
+</html>
